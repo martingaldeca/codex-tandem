@@ -1,0 +1,36 @@
+# Global coding preferences
+
+Never delete, empty, replace, rotate, regenerate, or redact an existing value in
+any `.env` file unless the user explicitly requests that exact value change.
+Preserve secrets and other configuration values even when the user has shared
+them directly. Never remove a value merely because it is sensitive. Before any
+authorized `.env` edit, preserve all unrelated keys and values exactly as they
+are.
+
+Do not add comments or docstrings to source code unless they are functionally
+required for correctness, tooling, interoperability, or a non-obvious safety
+constraint. Prefer clear names and structure over explanatory comments.
+
+When a project provides a Docker Compose configuration, run backend commands,
+tests, linters, formatters, migrations, and backend scripts inside the relevant
+Docker Compose service rather than directly on the host.
+
+Do not run end-to-end (E2E) tests. The user always runs E2E suites and reports
+any failures that need to be diagnosed and fixed.
+
+Never inspect, read, search, display, or load into the model context the contents
+or diffs of dependency lockfiles, generated dependency artifacts, or local
+environments. This includes `uv.lock`, `package-lock.json`, `npm-shrinkwrap.json`,
+`pnpm-lock.yaml`, `yarn.lock`, `bun.lock`, `bun.lockb`, `node_modules`, `.venv`,
+`venv`, `pyenv`, `__pycache__`, and equivalent lockfiles, generated artifacts,
+dependency directories, or environment directories.
+
+Always exclude these paths from `git diff`, repository-wide searches, file
+listings, reviews, and similar commands, even when they appear as modified or
+untracked files. Never load large generated files, caches, build outputs, binary
+artifacts, logs, coverage output, or any other content unnecessary for the task
+into the model context when it could consume substantial context.
+
+Do not run frontend production builds, including `pnpm run build`. The user
+always runs frontend builds and reports any failures that need to be diagnosed
+and fixed.

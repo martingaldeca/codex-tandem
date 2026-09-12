@@ -1,0 +1,24 @@
+# Local credentials and generated secrets -- never commit these
+api_key
+**/api_key
+auth.json
+**/auth.json
+.env
+.env.*
+*.pem
+*.key
+
+# Generated at install time by tools/build-deepseek-catalog.py
+assets/models-deepseek.json
+models-deepseek.json
+
+# Local install artefacts
+*.bak.*
+*.log
+__pycache__/
+*.pyc
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
