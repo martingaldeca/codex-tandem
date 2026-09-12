@@ -11,7 +11,15 @@ set -euo pipefail
 TANDEM_REPO="${TANDEM_REPO:-martingaldeca/codex-tandem}"
 TANDEM_REF="${TANDEM_REF:-main}"
 
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+# When the script arrives through a pipe (curl ... | bash) there is no
+# BASH_SOURCE, so fall back to the current directory and let the bootstrap
+# below fetch the rest of the project.
+SCRIPT_PATH="${BASH_SOURCE[0]:-}"
+if [ -n "$SCRIPT_PATH" ] && [ -e "$SCRIPT_PATH" ]; then
+  SCRIPT_DIR="$(cd -- "$(dirname -- "$SCRIPT_PATH")" && pwd)"
+else
+  SCRIPT_DIR="$PWD"
+fi
 ASSETS_DIR="$SCRIPT_DIR/assets"
 CATALOG_TEMPLATE="$ASSETS_DIR/catalog/deepseek-catalog.template.json"
 CATALOG_OVERRIDE="$ASSETS_DIR/models-deepseek.json"
